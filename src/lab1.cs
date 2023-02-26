@@ -1,3 +1,5 @@
+namespace meow.src;
+
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
@@ -5,14 +7,6 @@ public static class Lab1
 {
     public static Matrix? InverseOfMatrix(Matrix<double> inversed, Vector<double> replacedColumn, int index)
     {
-        // validation
-        var n = inversed.ColumnCount;
-        var argumentsAreValid = inversed.RowCount == n && replacedColumn.Count == n && index < n;
-        if (!argumentsAreValid)
-        {
-            throw new ArgumentException();
-        }
-
         // first step
         var l = inversed * replacedColumn;
 
@@ -31,14 +25,14 @@ public static class Lab1
         // fourth step not needed
 
         // fifth step
-
+        var n = inversed.Rank();
         var result = new DenseMatrix(n);
         for (var i = 0; i < n; i++)
         {
             for (var j = 0; j < n; j++)
             {
                 var indexPartMul = inversed[index, j] * l[i];
-                var diagonalPartMul = (index != i ? inversed[i, j] : 0);
+                var diagonalPartMul = index != i ? inversed[i, j] : 0;
                 result[i, j] = indexPartMul + diagonalPartMul;
             }
         }
