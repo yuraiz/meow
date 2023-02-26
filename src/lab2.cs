@@ -15,6 +15,15 @@ public static class Lab2
             basisIndexes.Select(index => vector[index])
         );
 
+    /// <summary>
+    /// Runs the second phase of the simplex algoritm
+    /// </summary>
+    /// <param name="targetFunction"></param>
+    /// <param name="table"></param>
+    /// <param name="basis"></param>
+    /// <param name="initialValues"></param>
+    /// <returns>The result of simplex algoritm</returns>
+    /// <exception cref="System.Diagnostics.UnreachableException"></exception>
     public static Vector<double>? SimplexPhase2(Vector<double> targetFunction, Matrix<double> table, int[] basis, Vector<double> initialValues)
     {
         var inversedBasisMatrix = table.ByBasis(basis).Inverse();
@@ -45,7 +54,7 @@ public static class Lab2
 
                 if (inversedBasisMatrix == null)
                 {
-                    throw new ArgumentException("Can't use simplex algoritm task for this arguments");
+                    throw new System.Diagnostics.UnreachableException("Can't use simplex algoritm task for this arguments");
                 }
             }
             else
@@ -55,6 +64,15 @@ public static class Lab2
         }
     }
 
+    /// <summary>
+    /// Used in the second phase of the simplex algoritm
+    /// </summary>
+    /// <param name="inversedBasisMatrix"></param>
+    /// <param name="j0"></param>
+    /// <param name="table"></param>
+    /// <param name="basis"></param>
+    /// <param name="initialValues"></param>
+    /// <returns>The index of basis matrix column to replace with column j0 of the table</returns>
     private static int? SimplexPhase2IterMainPart(Matrix<double> inversedBasisMatrix, int j0, Matrix<double> table, int[] basis, Vector<double> initialValues)
     {
         var z = inversedBasisMatrix * table.Column(j0);
