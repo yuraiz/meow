@@ -1,27 +1,30 @@
-﻿var matrix = new double[3, 3] {
-    {1, 0, 5},
-    {2, 1, 6},
-    {3, 4, 0},
-};
+﻿using MathNet.Numerics.LinearAlgebra.Double;
 
-var inversed = new double[3, 3] {
-    {-24,  20, -5},
-    { 18, -15,  4},
-    {  5,  -4,  1},
-};
+var matrix = DenseMatrix.OfArray(new[,] {
+    {1.0, 0.0, 5.0},
+    {2.0, 1.0, 6.0},
+    {3.0, 4.0, 0.0},
+});
 
-var replacedColumn = new double[3] {
-    2,
-    2,
-    2,
-};
+var inversed = DenseMatrix.OfArray(new[,] {
+    {-24.0,  20.0, -5.0},
+    { 18.0, -15.0,  4.0},
+    {  5.0,  -4.0,  1.0},
+});
+
+var replacedColumn = DenseVector.OfArray(new[] {
+    2.0,
+    2.0,
+    2.0,
+});
 
 var index = 1;
 
-matrix.PrettyPrint("matrix A");
-inversed.PrettyPrint("inversed matrix A");
-replacedColumn.PrettyPrintAsColumn("replaced column");
+Console.WriteLine($"matrix A = {matrix}");
+Console.WriteLine($"inversed matrix A = {inversed}");
+Console.WriteLine($"replaced column = {replacedColumn}");
 Console.WriteLine($"index = {index} (starts with 0)");
+Console.WriteLine();
 
 var result = Lab1.InverseOfMatrix(inversed, replacedColumn, index);
 
@@ -31,7 +34,7 @@ if (result == null)
 }
 else
 {
-    result.PrettyPrint("result");
+    Console.WriteLine($"result = {result}");
 }
 
 // Actual result
