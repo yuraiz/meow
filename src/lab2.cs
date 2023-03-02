@@ -5,12 +5,12 @@ using MathNet.Numerics.LinearAlgebra.Double;
 
 public static class Lab2
 {
-    private static Matrix<double> ByBasis(this Matrix<double> matrix, int[] basisIndexes)
+    public static Matrix<double> ByBasis(this Matrix<double> matrix, int[] basisIndexes)
         => Matrix.Build.DenseOfColumns(
             basisIndexes.Select(index => matrix.Column(index))
         );
 
-    private static Vector<double> ByBasis(this Vector<double> vector, int[] basisIndexes)
+    public static Vector<double> ByBasis(this Vector<double> vector, int[] basisIndexes)
         => Vector.Build.DenseOfEnumerable(
             basisIndexes.Select(index => vector[index])
         );
