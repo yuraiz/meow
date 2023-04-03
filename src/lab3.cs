@@ -5,7 +5,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 
 public static class Lab3
 {
-    public sealed class TaskIncompatibleException : Exception { }
+    public sealed class TaskNotFeasibleException : Exception { }
 
     public static Vector<double>? SimplexMethod(Vector<double> targetFunction, Matrix<double> table, Vector<double> b)
     {
@@ -38,7 +38,7 @@ public static class Lab3
 
         if (initialValues.Skip(table.ColumnCount).Any(el => el != 0))
         {
-            throw new TaskIncompatibleException();
+            throw new TaskNotFeasibleException();
         }
 
         initialValues = DenseVector.OfEnumerable(initialValues.Take(table.ColumnCount));
