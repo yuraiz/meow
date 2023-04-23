@@ -74,3 +74,38 @@ using meow.src;
 
     Console.WriteLine(result);
 }
+
+{
+    Console.WriteLine("Lab 6");
+    var targetFunction = DenseVector.OfArray(new[] {
+        -8.0, -6.0, -4.0, -6.0,
+    });
+
+    var table = DenseMatrix.OfArray(new[,] {
+        {1.0, 0.0, 2.0, 1.0},
+        {0.0, 1.0, -1.0, 2.0},
+    });
+
+    var matrixD = DenseMatrix.OfArray(new[,] {
+        {2.0, 1.0, 1.0, 0.0},
+        {1.0, 1.0, 0.0, 0.0},
+        {1.0, 0.0, 1.0, 0.0},
+        {0.0, 0.0, 0.0, 0.0},
+    });
+
+    var startPlan = DenseVector.OfArray(new[] {
+        2.0, 3.0, 0.0, 0.0,
+    });
+
+    var basisIndexes = new[] {
+        0, 1
+    };
+
+    var basisIndexesStarred = new[] {
+        0, 1
+    };
+
+    var result = Lab6.SolveQuadratic(targetFunction, table, matrixD, startPlan, basisIndexes, basisIndexesStarred);
+
+    Console.WriteLine(result);
+}
