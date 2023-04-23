@@ -3,60 +3,21 @@ using meow.src;
 
 // Example task
 var targetFunction = DenseVector.OfArray(new[] {
-    1.0, 0.0, 0.0
+    -4.0, 3.0, -7.0, 0.0, 0.0,
 });
 
 var table = DenseMatrix.OfArray(new[,] {
-    {1.0, 1.0, 1.0},
-    {2.0, 2.0, 2.0},
+    {-2.0, -1.0, -4.0, 1.0, 0.0},
+    {-2.0, -2.0, -2.0, 0.0, 1.0},
 });
 
 var b = DenseVector.OfArray(
     new[] {
-        -1.0, 0.0
+        -1.0, -1.5
     }
 );
 
-var expectedResult = new DenseVector(3);
+var basisIndexes = new[] { 3, 4 };
 
-if (!expectedResult.Equals(Lab3.SimplexMethod(targetFunction, table, b)))
-{
-    throw new Exception("Unexpected result");
-}
-
-// // Unrestriced task
-// targetFunction = DenseVector.OfArray(new[] {
-//     1.0, 0.0, 0.0
-// });
-
-// table = DenseMatrix.OfArray(new[,] {
-//     {0.0, 1.0, 1.0},
-// });
-
-// b = DenseVector.OfArray(new[] {
-//     0.0
-// });
-
-// if (Lab3.SimplexMethod(targetFunction, table, b) != null)
-// {
-//     throw new Exception("Unexpected result");
-// }
-
-// // Task with incompatible system
-// targetFunction = DenseVector.OfArray(new[] {
-//     1.0, 0.0, 0.0
-// });
-
-// table = DenseMatrix.OfArray(new[,] {
-//     {1.0, 1.0, 1.0},
-// });
-
-// b = DenseVector.OfArray(new[] { -1.0 });
-
-// try
-// {
-//     Lab3.SimplexMethod(targetFunction, table, b);
-
-//     throw new Exception("Unexpected result");
-// }
-// catch (Lab3.TaskIncompatibleException) { }
+var result = Lab4.DualSimplex(targetFunction, table, b, basisIndexes);
+Console.WriteLine(result);
